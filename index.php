@@ -394,27 +394,28 @@ document.getElementById(
 
 }
 
-function clearHistory(){
+function clearHistory() {
 
-localStorage.removeItem(
-"qrHistory"
-);
+    if (!confirm("Are you sure you want to clear all history?")) {
+        return;
+    }
 
-document.getElementById(
-"historyTable"
-).innerHTML="";
+    fetch("clear_history.php")
+    .then(response => response.text())
+    .then(data => {
 
-document.getElementById(
-"qrCode"
-).innerHTML="";
+        alert("History Cleared Successfully!");
 
-document.getElementById(
-"downloadBtn"
-).style.display="none";
+        document.getElementById("historyTable").innerHTML = "";
+        document.getElementById("qrCode").innerHTML = "";
 
-alert(
-"History Cleared Successfully"
-);
+        location.reload();
+
+    })
+    .catch(error => {
+        alert("Error clearing history");
+        console.log(error);
+    });
 
 }
 
