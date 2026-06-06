@@ -375,15 +375,17 @@ fetch("get_history.php")
 .then(response => response.json())
 .then(history => {
 
+console.log(history);
+
 let table = "";
 
 history.forEach(item => {
 
 table += `
 <tr>
-<td>${item.text_url}</td>
+<td>${item.text_url || ""}</td>
 <td><img src="${item.qr_image}" class="preview"></td>
-<td>${item.created_at}</td>
+<td>${item.created_at || "N/A"}</td>
 <td>
 <a href="${item.qr_image}" download="qrcode.png" class="history-download">
 ⬇ Download
@@ -396,6 +398,9 @@ table += `
 
 document.getElementById("historyTable").innerHTML = table;
 
+})
+.catch(error => {
+console.log(error);
 });
 
 }
