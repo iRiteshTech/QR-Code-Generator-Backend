@@ -104,13 +104,13 @@ Columns:
 ## Screenshots
 
 ### Main QR Generator Page
-![Main QR Generator Page](./Screenshot%202026-06-06%20144920.png)
+![Main QR Generator Page](Screenshot%202026-06-06%20144533.png)
 
 ### Generated QR Code
-![Generated QR Code](./Screenshot%202026-06-06%20144941.png)
+![Generated QR Code](Screenshot%202026-06-06%20144609.png)
 
 ### QR History Table
-![QR History Table](./Screenshot%202026-06-06%20145244.png)
+![QR History Table](Screenshot%202026-06-06%20144649.png)
 
 
 
