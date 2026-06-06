@@ -100,9 +100,6 @@ Columns:
 
 \- created\_at
 
-
-## Screenshots
-
 ### Main QR Generator Page
 ![Main QR Generator Page](Screenshot%202026-06-06%20160419.png)
 
