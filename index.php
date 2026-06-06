@@ -344,53 +344,28 @@ document.getElementById("textInput").value="";
 
 }
 
-function loadHistory(){
+function clearHistory() {
 
-let history=
-JSON.parse(
-localStorage.getItem("qrHistory")
-) || [];
+    if (!confirm("Are you sure you want to clear all history?")) {
+        return;
+    }
 
-let table="";
+    fetch("clear_history.php")
+    .then(response => response.text())
+    .then(data => {
 
-history.reverse().forEach(item=>{
+        alert("History Cleared Successfully!");
 
-table+=`
+        document.getElementById("historyTable").innerHTML = "";
+        document.getElementById("qrCode").innerHTML = "";
 
-<tr>
+        location.reload();
 
-<td>${item.text}</td>
-
-<td>
-<img
-src="${item.image}"
-class="preview">
-</td>
-
-<td>${item.date}</td>
-
-<td>
-
-<a
-href="${item.image}"
-download="qrcode.png"
-class="history-download">
-
-⬇ Download
-
-</a>
-
-</td>
-
-</tr>
-
-`;
-
-});
-
-document.getElementById(
-"historyTable"
-).innerHTML=table;
+    })
+    .catch(error => {
+        alert("Error clearing history");
+        console.log(error);
+    });
 
 }
 
