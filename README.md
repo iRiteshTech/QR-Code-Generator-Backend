@@ -114,3 +114,35 @@ Add screenshots of:
 
 3\. QR History Table
 
+
+
+\## Project Structure
+
+
+
+qr\_generator/
+
+│
+
+├── index.php
+
+├── db.php
+
+├── save\_qr.php
+
+├── get\_history.php
+
+├── README.md
+
+
+
+\## Author
+
+
+
+Ritesh Raj Tiwary
+
+Thinklar Internship Assessment 2026
+
+
+
