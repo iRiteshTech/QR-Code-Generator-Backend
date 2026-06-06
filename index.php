@@ -369,13 +369,13 @@ function clearHistory() {
 
 }
 
-function loadHistory(){
-
 fetch("get_history.php")
-.then(response => response.json())
-.then(history => {
+.then(response => response.text())
+.then(data => {
 
-console.log(history);
+console.log(data);
+
+let history = JSON.parse(data);
 
 let table = "";
 
@@ -383,9 +383,9 @@ history.forEach(item => {
 
 table += `
 <tr>
-<td>${item.text_url || ""}</td>
+<td>${item.text_url}</td>
 <td><img src="${item.qr_image}" class="preview"></td>
-<td>${item.created_at || "N/A"}</td>
+<td>${item.created_at}</td>
 <td>
 <a href="${item.qr_image}" download="qrcode.png" class="history-download">
 ⬇ Download
@@ -398,7 +398,7 @@ table += `
 
 document.getElementById("historyTable").innerHTML = table;
 
-})
+});
 .catch(error => {
 console.log(error);
 });
