@@ -203,7 +203,21 @@ button{
 }
 
 }
-
+#notification{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:#16a34a;
+    color:white;
+    padding:15px 30px;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:600;
+    display:none;
+    z-index:9999;
+    box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
 </style>
 </head>
 
@@ -330,20 +344,32 @@ fetch("save_qr.php",{
     "text="+encodeURIComponent(text)+
     "&image="+encodeURIComponent(img.src)
 })
-.then(response=>response.text())
-.then(data=>console.log(data));
+.then(response => response.text())
+.then(data => {
 
-let btn=document.getElementById("downloadBtn");
+    console.log(data);
 
-btn.href=img.src;
-btn.download="qrcode_"+Date.now()+".png";
+    loadHistory();
+   
+   let notification = document.getElementById("notification");
 
-btn.style.display="inline-block";
+notification.innerHTML = "QR Generated Successfully!";
+notification.style.display = "block";
 
-loadHistory();
+setTimeout(() => {
+    notification.style.display = "none";
+}, 2000);
 
-document.getElementById("textInput").value="";
+    let btn = document.getElementById("downloadBtn");
 
+    btn.href = img.src;
+    btn.download = "qrcode_" + Date.now() + ".png";
+
+    btn.style.display = "inline-block";
+
+    document.getElementById("textInput").value = "";
+
+});
 }
 
 },500);
@@ -351,26 +377,35 @@ document.getElementById("textInput").value="";
 }
 
 function clearHistory() {
-
-    if (!confirm("Are you sure you want to clear all history?")) {
-        return;
+if(!confirm("Are you sure you want to clear all QR history?")){
+    return;
     }
 
     fetch("clear_history.php")
     .then(response => response.text())
     .then(data => {
 
-        alert("History Cleared Successfully!");
-
         document.getElementById("historyTable").innerHTML = "";
         document.getElementById("qrCode").innerHTML = "";
 
-        location.reload();
+        let notification = document.getElementById("notification");
+
+        notification.innerHTML = "History Cleared Successfully!";
+        notification.style.display = "block";
+
+        setTimeout(() => {
+
+            notification.style.display = "none";
+            loadHistory();
+
+        }, 2000);
 
     })
     .catch(error => {
+
         alert("Error clearing history");
         console.log(error);
+
     });
 
 }
@@ -416,5 +451,6 @@ loadHistory();
 
 </script>
 
+<div id="notification"></div>
 </body>
 </html>
