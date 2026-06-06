@@ -369,28 +369,34 @@ function clearHistory() {
 
 }
 
-function clearHistory() {
+function loadHistory(){
 
-    if (!confirm("Are you sure you want to clear all history?")) {
-        return;
-    }
+fetch("get_history.php")
+.then(response => response.json())
+.then(history => {
 
-    fetch("clear_history.php")
-    .then(response => response.text())
-    .then(data => {
+let table = "";
 
-        alert("History Cleared Successfully!");
+history.forEach(item => {
 
-        document.getElementById("historyTable").innerHTML = "";
-        document.getElementById("qrCode").innerHTML = "";
+table += `
+<tr>
+<td>${item.text_url}</td>
+<td><img src="${item.qr_image}" class="preview"></td>
+<td>${item.created_at}</td>
+<td>
+<a href="${item.qr_image}" download="qrcode.png" class="history-download">
+⬇ Download
+</a>
+</td>
+</tr>
+`;
 
-        location.reload();
+});
 
-    })
-    .catch(error => {
-        alert("Error clearing history");
-        console.log(error);
-    });
+document.getElementById("historyTable").innerHTML = table;
+
+});
 
 }
 
