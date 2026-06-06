@@ -101,18 +101,16 @@ Columns:
 \- created\_at
 
 
+## Screenshots
 
-\## Screenshots
+### Main QR Generator Page
+![Main QR Generator Page](Screenshot 2026-06-06 144920.png)
 
+### Generated QR Code
+![Generated QR Code](Screenshot 2026-06-06 144941.png)
 
-
-Add screenshots of:
-
-1\. Main QR Generator Page
-
-2\. Generated QR Code
-
-3\. QR History Table
+### QR History Table
+![QR History Table](Screenshot 2026-06-06 145244.png)
 
 
 
