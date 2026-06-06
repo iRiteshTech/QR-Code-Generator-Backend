@@ -20,6 +20,8 @@
 body{
     background:#f5f6fa;
     padding:40px;
+    max-width:1200px;
+    margin:auto;
 }
 
 .container{
@@ -63,13 +65,13 @@ body{
 
 .form-row{
     display:flex;
+    align-items:center;
+    justify-content:center;
     gap:15px;
-    flex-wrap:wrap;
 }
 
 input{
-    flex:1;
-    min-width:300px;
+    width:500px;
     padding:14px;
     border:1px solid #ddd;
     border-radius:10px;
@@ -132,7 +134,9 @@ button{
 #qrCode{
     display:flex;
     justify-content:center;
+    align-items:center;
     margin-top:25px;
+    min-height:220px;
 }
 
 #qrCode img{
@@ -204,6 +208,8 @@ button{
 </head>
 
 <body>
+
+<div class="container">
 
 <div class="title">
 
@@ -368,6 +374,7 @@ function clearHistory() {
     });
 
 }
+function loadHistory(){
 
 fetch("get_history.php")
 .then(response => response.text())
@@ -398,7 +405,7 @@ table += `
 
 document.getElementById("historyTable").innerHTML = table;
 
-});
+})
 .catch(error => {
 console.log(error);
 });
