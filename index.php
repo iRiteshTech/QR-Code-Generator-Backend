@@ -280,7 +280,9 @@ Clear History
 </div>
 
 </div>
-
+<h3 id="totalCount" style="margin-bottom:15px;color:#7c3aed;">
+Total QR Codes Generated: 0
+</h3>
 <h2 class="history-title">
 QR History
 </h2>
@@ -385,9 +387,11 @@ if(!confirm("Are you sure you want to clear all QR history?")){
     .then(response => response.text())
     .then(data => {
 
-        document.getElementById("historyTable").innerHTML = "";
-        document.getElementById("qrCode").innerHTML = "";
-
+document.getElementById("historyTable").innerHTML = "";
+document.getElementById("totalCount").innerHTML =
+"Total QR Codes Generated: 0";
+document.getElementById("qrCode").innerHTML = "";
+document.getElementById("downloadBtn").style.display = "none";
         let notification = document.getElementById("notification");
 
         notification.innerHTML = "History Cleared Successfully!";
@@ -418,6 +422,13 @@ fetch("get_history.php")
 console.log(data);
 
 let history = JSON.parse(data);
+document.getElementById("totalCount").innerHTML =
+"Total QR Codes Generated: " + history.length;
+if(history.length === 0){
+    document.getElementById("historyTable").innerHTML =
+    "<tr><td colspan='4'>No QR Codes Generated Yet</td></tr>";
+    return;
+}
 
 let table = "";
 
